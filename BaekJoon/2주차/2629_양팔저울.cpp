@@ -4,7 +4,7 @@ using namespace std;
 int n, n2, bead, chu[31];
 int dp[31][15001];
 
-void DP(int i, int w){
+void DP(int i, int w) {
 	if (i > n || dp[i][w]) return;
 	dp[i][w] = true;
 	DP(i + 1, w + chu[i]);
@@ -12,22 +12,23 @@ void DP(int i, int w){
 	DP(i + 1, w);
 }
 
-int main(){
+int main() {
 	cin >> n;
 
-	for (int i = 0; i < n; i++){
+	for (int i = 0; i < n; i++)
 		cin >> chu[i];
-	}
+	
 	DP(0, 0);
 
 	cin >> n2;
-
-	for (int i = 0; i < n2; i++){
+	for (int i = 0; i < n2; i++) {
 		cin >> bead;
-
-		if(bead > 15000) cout << "N ";
-		else if (dp[n][bead]) cout << "Y ";
-		else cout << "N ";
+		if(bead > 15000) 
+      cout << "N ";
+		else if (dp[n][bead]) 
+      cout << "Y ";
+		else 
+      cout << "N ";
 	}	
 }
 
