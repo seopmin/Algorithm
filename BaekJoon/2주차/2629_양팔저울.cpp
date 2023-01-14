@@ -4,12 +4,12 @@ using namespace std;
 int n, n2, bead, chu[31];
 int dp[31][15001];
 
-void DP(int i, int w) {
+void func(int i, int w) {
 	if (i > n || dp[i][w]) return;
 	dp[i][w] = true;
-	DP(i + 1, w + chu[i]);
-	DP(i + 1, abs(w - chu[i]));
-	DP(i + 1, w);
+	func(i + 1, w + chu[i]);
+	func(i + 1, abs(w - chu[i]));
+	func(i + 1, w);
 }
 
 int main() {
@@ -18,7 +18,7 @@ int main() {
 	for (int i = 0; i < n; i++)
 		cin >> chu[i];
 	
-	DP(0, 0);
+	func(0, 0);
 
 	cin >> n2;
 	for (int i = 0; i < n2; i++) {
