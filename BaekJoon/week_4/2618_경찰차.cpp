@@ -1,15 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
-<<<<<<< HEAD
-#include<cmath>
-using namespace std;
-int n, w;
-vector<pair<int, int>> v(w);
 
-int func(int i, pair<int, int> p1, pair<int, int> p2) {
-  if(i >= w) return 1;
-=======
 #include<cstring>
 using namespace std;
 int n, w; 
@@ -41,19 +33,12 @@ int func(int p1, int p2) {
     dp[p1][p2] = result2;
   }
   return dp[p1][p2];
->>>>>>> 44e16823e58db84dc73db2f4d1d252bb3ef9b559
 }
 
 int main() {
   ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
   cin >> n >> w;
-<<<<<<< HEAD
 
-  pair<int, int> p1 = {1,1}, p2 = {n,n};
-  for(int i=0; i<w; i++)
-    cin >> v[i].first >> v[i].second;
-}
-=======
   pair<int, int> p1={1,1}, p2{n,n};
 
   loc.push_back({0,0});
@@ -86,4 +71,3 @@ int main() {
   //   result[d]=2;
   //   return b;
   // }
->>>>>>> 44e16823e58db84dc73db2f4d1d252bb3ef9b559

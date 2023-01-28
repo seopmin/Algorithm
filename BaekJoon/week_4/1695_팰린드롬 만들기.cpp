@@ -1,5 +1,4 @@
 // 알고리즘 큰 틀 : 투포인터 이용
-// cnt 변수 : 숫자를 추가한 횟수
 
 #include<iostream>
 #include<algorithm>
