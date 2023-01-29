@@ -1,5 +1,5 @@
 #include<iostream>
-#include<limits>
+#include<limits.h>
 #include<algorithm>
 using namespace std;
 int n, arr[20][20], result=INT_MAX;
@@ -9,11 +9,10 @@ int func() {
   int a=0, b=0;
   for(int i=0; i<n-1; i++) {
     for(int j=i+1; j<n; j++) {
-      if(visited[i] && visited[j]) {
+      if(visited[i] && visited[j])
         a += arr[i][j]+arr[j][i];
-      }else if(!visited[i] && !visited[j]) {
+      else if(!visited[i] && !visited[j])
         b += arr[i][j]+arr[j][i];
-      }
     }
   }
   return abs(a-b);
