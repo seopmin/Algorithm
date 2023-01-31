@@ -19,7 +19,7 @@ void dfs(int depth, int value) {
     return;
   }
   for(int i=0; i<4; i++) {
-    if(oper_cnt[i] != 0) {
+    if(oper_cnt[i] > 0) {
       oper_cnt[i]--;
       dfs(depth+1, cal(i, value, depth));
       oper_cnt[i]++;
