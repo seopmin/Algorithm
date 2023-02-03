@@ -41,8 +41,7 @@ int check(int x, int y) {
     copy_y++;
     copy_x++;
   }
-
-  cout << "depth :" << copy_y <<endl;
+  copy_x=x, copy_y=y;
   return 1;
 }
 
