@@ -1,45 +1,60 @@
-// 팰린드롬 만들기
-
 #include <iostream>
 #include <algorithm>
-#include <string.h>
+#include <string>
+#include <cmath>
 
 using namespace std;
 
-int n;
-int arr[5001];
-int dp[2500][2500];
+int a, p;
+int visited[1000000] = {0, };
+int depth[1000000] = {0, };
+int result = 0;
 
-int sol(int l, int r){ // right index, left index
-    if(l >= r){
-        return 0;
+int getSum(int val, int p_){
+    int res = 0;
+
+    // // 문자열 분리 활용
+    // string str = to_string(val);
+    // for(int i=0; i<str.size(); i++){
+    //     res += pow(str[i] - '0', p_);
+    // }
+    int tmp = val;
+
+    for(int i = 0; i < to_string(val).size(); i++){
+        // tmp 사용하지 않고 val 넣으면, 반복문 조건이 바뀌므로 오답
+        res += pow((tmp % 10), p_);
+        tmp /= 10;
     }
+
+    return res;
+}
+
+int DFS(int val, int p_, int dep){
+    // val = d(1)부터 시작. 수열 d의 값들.
+    // dep = 이전 노드의 depth
     
-    if(dp[l][r] != -1){
-        return dp[l][r];
+    ++visited[val];
+
+    if(visited[val] >= 2){ // 종료조건
+        return depth[val] - 1;
+        // return;
     }
 
-    if(arr[l] == arr[r]){
-        dp[l][r] = sol(l+1, r-1);
-    }
-    else{
-        dp[l][r] = (1 + min(sol(l+1, r), sol(l, r-1)));
-    }
+    depth[val] = dep + 1;
 
-    return dp[l][r];
-
+    int next_val = getSum(val, p_);
+    return DFS(next_val, p_, depth[val]);
 }
 
 int main(){
-    cin>>n;
-    for(int i=0; i<n; i++){
-        cin>>arr[i];
-    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 
-    memset(dp, -1, sizeof(dp));
+    cin>>a>>p;
 
-    int ans = sol(0, n-1);
-    cout<< ans << endl;
+    cout << DFS(a, p, 0);
+    // cout << result;
 
     return 0;
 }
