@@ -1,5 +1,4 @@
 #include<iostream>
-#include<vector>
 using namespace std;
 int dp[1001] = {0,1,3,};
 int n;
