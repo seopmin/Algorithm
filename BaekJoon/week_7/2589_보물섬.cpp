@@ -1,4 +1,4 @@
-// dfs 중 가장 깊은 노드를 찾는 문제인줄 알았지만 -> bfs문제이다
+// dfs 중 가장 깊은 노드를 찾는 문제인줄 알았지만 -> bfs문제
 #include<iostream>
 #include<string.h>
 #include<algorithm>

@@ -8,34 +8,28 @@ string s1, temp, s2 = "123456780";
 set<string> visited;
 int dx[] = {1,-1,0,0};
 int dy[] = {0,0,1,-1};
+int depth, x, y, zero, nx, ny;
 
 int bfs() {
   queue<pair<string, int>> q;
   q.push({s1, 0});
   visited.insert(s1);
   while(!q.empty()) {
-    string current = q.front().first; 
-    int depth = q.front().second; 
-    q.pop();
-    if(current == s2)  return depth;
+    tie(s1, depth) = q.front(); q.pop();
+    if(s1 == s2)  return depth;
 
-    int zero = current.find('0');
-    int x = zero/3;
-    int y = zero%3;
-
+    zero = s1.find('0');
+    x = zero/3; y = zero%3;
     for(int i=0; i<4; i++) {
-      int nx = x+dx[i];
-      int ny = y+dy[i];
-      int index = nx*3+ny;
+      nx = x+dx[i];
+      ny = y+dy[i];
+      if (nx < 0 || ny < 0 || nx > 2 || ny > 2) continue;
       
-      if (nx >= 0 && ny >= 0 && nx < 3 && ny < 3){
-        string next = current;
-        swap(next[x*3+y], next[index]);
-
-        if(visited.find(next) == visited.end()){
-          visited.insert(next);
-          q.push({next, depth+1});
-        }
+      temp = s1;
+      swap(temp[x*3+y], temp[nx*3+ny]);
+      if(visited.find(temp) == visited.end()){
+        visited.insert(temp);
+        q.push({temp, depth+1});
       }
     }
   }
