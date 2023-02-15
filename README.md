@@ -1,2 +1,4 @@
 ### Algorithm
-코테 천제를 향한 여정
+<hr>
+
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=kms0202)](https://solved.ac/kms0202)
