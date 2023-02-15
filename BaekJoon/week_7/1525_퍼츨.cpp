@@ -1,54 +1,115 @@
 #include<iostream>
-#include<vector>
+#include<queue>
+#include<string>
+#include<algorithm>
+#include<set>
 using namespace std;
-int result=-1, temp;
-vector<vector<int>> pre_arr;
-vector<int> v(9);
+string s1, temp, s2 = "123456780";
+set<string> visited;
+int dx[] = {1,-1,0,0};
+int dy[] = {0,0,1,-1};
 
-int check2() {
+int bfs() {
+  queue<pair<string, int>> q;
+  q.push({s1, 0});
+  visited.insert(s1);
+  while(!q.empty()) {
+    string current = q.front().first; 
+    int depth = q.front().second; 
+    q.pop();
+    if(current == s2)  return depth;
 
-}
+    int zero = current.find('0');
+    int x = zero/3;
+    int y = zero%3;
 
-int check(int (*arr)[3]) {
-  int compare=1;
-  for(int i=0; i<3; i++)
-    for(int j=0; j<3; j++)
-      if(arr[i][j]!=compare++) return 0;
-  
-  return 1;
-}
+    for(int i=0; i<4; i++) {
+      int nx = x+dx[i];
+      int ny = y+dy[i];
+      int index = nx*3+ny;
+      
+      if (nx >= 0 && ny >= 0 && nx < 3 && ny < 3){
+        string next = current;
+        swap(next[x*3+y], next[index]);
 
-void dfs(int pre_x, int pre_y, int now_x, int now_y, int depth, int (*arr)[3]){
-  if(now_x<0 || now_y<0 || now_x>2 || now_y>2)
-    return;
-  if(check(arr)){
-    result=depth;
-    return;
+        if(visited.find(next) == visited.end()){
+          visited.insert(next);
+          q.push({next, depth+1});
+        }
+      }
+    }
   }
-
-  
-  
-
-  temp=arr[pre_y][pre_x];
-  arr[pre_y][pre_x]=arr[now_y][now_x];
-  arr[now_y][now_x]=temp;
-
-  dfs(now_x, now_y, now_x+1, now_y, depth+1, arr);
-  dfs(now_x, now_y, now_x-1, now_y, depth+1, arr);
-  dfs(now_x, now_y, now_x, now_y+1, depth+1, arr);
-  dfs(now_x, now_y, now_x, now_y-1, depth+1, arr);
+  return -1;
 }
 
 int main() {
-  int arr[3][3], a, b;
-  for(int i=0; i<3; i++)
-    for(int j=0; j<3; j++){
-      cin >> arr[i][j];
-      if(arr[i][j]==0) {
-        a=j; b=i;
-      }
-    }
-
-  dfs(a,b,a,b,0, arr);
-  cout << result;
+  ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+  for(int i=0; i<9; i++) {
+    cin >> temp;
+    s1 += temp;
+  }
+  cout << bfs();
 }
+
+
+// dfs 탐색으로는 실패... 뭔가 계속 실행됨. 반복은 아닌 것 같은데 경우의 수가 너무 많아서 그런가
+// #include<iostream>
+// #include<vector>
+// #include<limits.h>
+// #include<stdlib.h>
+// using namespace std;
+// int result=INT_MAX;
+// string s2="123456780";
+// vector<string> visited;
+// int count_e =0;
+// int dx[] = {0, 0, 1, -1};
+// int dy[] = {1, -1, 0, 0};
+
+
+
+// void dfs(int x, int y, int depth, string s1){
+//   count_e++;
+//   if (count_e == 100) {
+//     exit(1);
+//   }
+//   if(x<0 || y<0 || x>2 || y>2)
+//     return;
+//   if(s1==s2){
+//     result=min(result,depth);
+//     return;
+//   }
+//   if(find(visited.begin(), visited.end(), s1) != visited.end()){
+//     cout << "called" <<endl;
+//     return;
+//   }
+  
+
+
+//   cout << depth << " : " << s1 << endl;
+//   cout << '[';
+//   for(int i=0; i<visited.size(); i++) {
+//     cout << visited[i] << ' ';
+//   }
+//   cout << ']'<< endl;
+//   visited.push_back(s1);
+//   for(int i=0; i<4; i++) {
+//     int nx = x+dx[i]; int ny = y+dy[i];
+//     swap(s1[nx*3+ny], s1[x*3+y]);
+//     dfs(nx, ny, depth+1, s1);
+//     swap(s1[nx*3+ny], s1[x*3+y]);
+//   }
+// }
+
+// int main() {
+//   string s1, temp;
+//   for(int i=0; i<9; i++) {
+//     cin >> temp;
+//     s1 += temp;
+//   }
+  
+//   int zero = s1.find('0');
+//   int x = zero/3;
+//   int y = zero%3;
+//   dfs(x, y, 0, s1);
+//   cout << result;
+// }
