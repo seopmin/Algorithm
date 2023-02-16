@@ -1,8 +1,4 @@
 *
 .vscode/
 
-!*.cpp
-
-!*/
-
-free.cpp
+!BaekJoon/
