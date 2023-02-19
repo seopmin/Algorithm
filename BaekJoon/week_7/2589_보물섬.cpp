@@ -2,6 +2,7 @@
 #include<iostream>
 #include<string.h>
 #include<algorithm>
+#include<tuple>
 #include<queue>
 using namespace std;
 int n, m, result, visited[51][51];
