@@ -11,7 +11,6 @@ void func(int a, int b) {
     cin >> v[i];
   }
   while(v.size()) {
-    cout << endl;
     int discern = 1;
     for(int i=1; i<v.size(); i++) {
       if(v[0]<v[i]) {
