@@ -13,8 +13,8 @@ int main() {
 
   cout << "<";
   while(v.size()!=1) {
-    while(idx >= v.size()) {
-      idx -= v.size();
+    if(idx >= v.size()) {
+      idx = idx % (v.size());
     }
     cout << v[idx] << ", ";
     v.erase(v.begin()+idx);
