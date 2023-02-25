@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 int visited[100001];
@@ -25,8 +26,8 @@ int main() {
     v[a].push_back(b);
     v[b].push_back(a);
   }
-  
-  for(int i=0; i<n; i++)
+
+  for(int i=1; i<=n; i++)
     sort(v[i].begin(), v[i].end());
 
   dfs(r, v);
