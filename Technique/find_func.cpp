@@ -27,5 +27,4 @@ int main() {
     cout << s.find("1",1) << endl;
   }
 
-
 }
