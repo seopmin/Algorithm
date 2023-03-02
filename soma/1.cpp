@@ -31,7 +31,6 @@ void bfs(vector<string> v) {
   queue<pair<vector<string>, int>> q;
   q.push({v, 0});
   
-
   while(q.size()) {
     int depth;
     cout << "depth: " << depth << endl;
@@ -48,24 +47,7 @@ void bfs(vector<string> v) {
     }
     mem.insert(s);
 
-    // 왼 왼
-    swap(v[0][0], v[1][0]);
-    q.push({v, depth+1});
-    swap(v[0][0], v[1][0]);
-    // 오 오
-    swap(v[0][1], v[1][1]);
-    q.push({v, depth+1});
-    swap(v[0][1], v[1][1]);
-    // 왼 오
-    swap(v[0][0], v[1][1]);
-    q.push({v, depth+1});
-    swap(v[0][0], v[1][1]);
-    
-    swap(v[0][1], v[1][0]);
-    q.push({v, depth+1});
-    swap(v[0][1], v[1][0]);
-
-    for(int i=1; i<v.size()-1; i++) {
+    for(int i=0; i<v.size()-1; i++) {
       swap(v[i][0], v[i+1][0]);
       q.push({v, depth+1});
       swap(v[i][0], v[i+1][0]);
@@ -84,6 +66,28 @@ void bfs(vector<string> v) {
     }
   }
 }
+
+
+int solved(int k, vector<string> v) {
+  n = k;
+  bfs(v);
+  // dfs(v, 0);
+  return result;
+}
+
+int main() {
+  int n; cin >> n;
+  string s;
+  vector<string> v;
+  for(int i=0; i<n; i++) {
+    cin >> s;
+    v.push_back(s);
+  }
+  cout << solved(n, v);
+}
+
+
+
 
 // void dfs(vector<string> v, int depth) {
 //   cout << "depth: " << depth << endl;
@@ -133,21 +137,3 @@ void bfs(vector<string> v) {
 //     swap(v[i][1], v[i+1][0]);
 //   }
 // }
-
-int solved(int k, vector<string> v) {
-  n = k;
-  bfs(v);
-  // dfs(v, 0);
-  return result;
-}
-
-int main() {
-  int n; cin >> n;
-  string s;
-  vector<string> v;
-  for(int i=0; i<n; i++) {
-    cin >> s;
-    v.push_back(s);
-  }
-  cout << solved(n, v);
-}
