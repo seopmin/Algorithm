@@ -42,7 +42,6 @@ int main() {
     if(w==0 && h==0) break;
 
     init();
-
     for(int i=0; i<h; i++)
       for(int j=0; j<w; j++)
         cin >> map[i][j];
@@ -51,9 +50,6 @@ int main() {
       for(int j=0; j<w; j++)
         sum+=bfs(j, i);
     
-    v.push_back(sum);
-  }
-  for(int i=0; i<v.size(); i++) {
-    cout << v[i] << endl;
+    cout << sum << '\n';
   }
 }
