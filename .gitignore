@@ -1,4 +1,5 @@
-*
+*.exe
+
 .vscode/
 
 free.cpp
@@ -6,3 +7,5 @@ free.cpp
 !*.cpp
 
 soma/
+
+*.py
