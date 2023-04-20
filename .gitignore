@@ -1,0 +1,9 @@
+*
+!*.cpp
+!*/
+*.dSYM/
+free.cpp
+.vscode/
+soma/
+*.py
+!.gitignore
