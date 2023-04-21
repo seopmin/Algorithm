@@ -18,8 +18,8 @@ int main() {
   }
   
   int m=0;
-  for(int i=1; i<=n; i++) {
+  for(int i=1; i<=n; i++)
     m = max(m, dp[i]);
-  }
+
   cout << m;
 }
