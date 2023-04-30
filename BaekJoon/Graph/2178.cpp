@@ -38,7 +38,47 @@ int main() {
   cout << result;
 }
 
+/* 비슷한 또다른 풀이 */
+// #include<iostream>
+// #include<string.h>
+// #include<queue>
+// #include<tuple>
+// #include<limits.h>
+// using namespace std;
+// int n, m, depth;
+// int result = INT_MAX;
+// string s[101];
+// int dy[] = {0,0,1,-1};
+// int dx[] = {1,-1,0,0};
+// int visited[101][101];
 
+// void bfs(int x, int y) {
+//   queue<tuple<int, int, int>> q;
+//   q.push({x, y, 1});
+//   while(q.size()) {
+//     tie(x, y, depth) = q.front(); q.pop();
+//     if(x==m-1&&y==n-1) {
+//       cout << depth << endl;
+//       break;
+//     }
+//     for(int i=0; i<4; i++) {
+//       int n_x = x+dx[i];
+//       int n_y = y+dy[i];
+//       if(n_x >=0 && n_y>=0 && n_x<m && n_y<n && s[n_y][n_x]=='1' && !visited[n_y][n_x]) {
+//         visited[n_y][n_x] = 1;
+//         q.push({n_x, n_y, depth+1});  
+//       }
+//     }
+//   }
+// }
+
+// int main() {
+//   cin >> n >> m;
+//   for(int i=0; i<n; i++) {
+//     cin >> s[i];
+//   }
+//   bfs(0, 0);
+// }
 
 
 
