@@ -10,7 +10,7 @@ int main() {
 
   for(int i=2; i*i<=n; i++) {
     if(ch[i]==0) continue;
-    for(int j=i+i; j<=n; j+=i) {
+    for(int j=i*i; j<=n; j+=i) {
       ch[j]=0;
     }
   }
