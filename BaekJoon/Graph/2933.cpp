@@ -1,3 +1,120 @@
+#include<iostream>
+#include<queue>
+#include<tuple>
+#include<string.h>
+using namespace std;
+int r, c, n, b, pos, x, y, visited[101][101], min_discern;
+int dx[] = {0,0,1,-1}, dy[] = {1,-1,0,0};
+char m[101][101];
+bool disc;
+vector<pair<int, int>> v;
+
+void bfs(int a, int b) {
+	queue<pair<int, int>> q;
+	q.push({a, b});
+	visited[b][a]=1;
+	while(q.size()) {
+		tie(x,y) = q.front(); q.pop();
+		for(int i=0; i<4; i++) {
+			int nx=x+dx[i], ny=y+dy[i];
+			if(nx<0 || ny<0 || nx>=c || ny>=r) continue;
+			if(!visited[ny][nx] && m[ny][nx]=='x') {
+				visited[ny][nx]=1;
+				q.push({nx, ny});
+			}
+		}
+	}
+}
+
+void distroy(bool disc, int b) {
+	pos = r-b;
+	if(disc) {
+		for(int i=0; i<c; i++)
+			if(m[pos][i]=='x') { m[pos][i]='.'; return; }
+	} else {
+		for(int i=c-1; i>=0; i--)
+			if(m[pos][i]=='x') { m[pos][i]='.'; return; }
+	}
+}
+
+void bfs2(int a, int b, int cnt) {
+	queue<pair<int, int>> q;
+	q.push({a, b});
+	visited[b][a]=cnt;
+	while(q.size()) {
+		tie(x,y) = q.front(); q.pop();
+		int discern=r-y;
+		for(int i=y+1; i<r; i++) {
+			if(visited[i][x]==1) {
+				discern=i-y;
+				break;
+			}
+		}
+		min_discern = min(min_discern, discern);
+		for(int i=0; i<4; i++) {
+			int nx=x+dx[i], ny=y+dy[i];
+			if(nx<0 || ny<0 || nx>=c || ny>=r) continue;
+			if(!visited[ny][nx] && m[ny][nx]=='x') {
+				visited[ny][nx]=cnt;
+				q.push({nx, ny});
+			}
+		}
+	}
+}
+
+void setting(int cnt) {
+	for(int i=r-2; i>=0; i--) {
+		for(int j=0; j<c; j++) {
+			if(visited[i][j]==cnt) {
+				visited[i][j]=0;
+				visited[i+min_discern][j]=cnt;
+				m[i][j]='.';
+				m[i+min_discern][j]='x';
+			}
+		}
+	}
+}
+
+void floating() {
+	int cnt=2;
+	for(int i=r-1; i>=0; i--) {
+		for(int j=0; j<c; j++) {
+			if(!visited[i][j] && m[i][j]=='x') {
+				min_discern=101;
+				bfs2(j, i, cnt);
+				min_discern--;
+				setting(cnt);
+				cnt++;
+			}
+		}
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	cin >> r >> c;
+	for(int i=0; i<r; i++)
+		for(int j=0; j<c; j++)
+			cin >> m[i][j];
+
+	cin >> n;
+	for(int i=0; i<n; i++) {
+		memset(visited, 0, sizeof(visited));
+		cin >> b;
+		disc = !disc;
+		distroy(disc, b);
+		for(int i=0; i<c; i++) {
+			if(m[r-1][i]=='x' && !visited[r-1][i]) bfs(i, r-1);
+		}
+		floating();
+	}
+	for(int i=0; i<r; i++) {
+		for(int j=0; j<c; j++)
+			cout << m[i][j];
+		cout << endl;
+	}
+}
+
 // Not Solved
 
 
