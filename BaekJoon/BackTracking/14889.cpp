@@ -2,6 +2,7 @@
 #include<algorithm>
 #include<cmath>
 #include<limits.h>
+#include<vector>
 using namespace std;
 int n, map[21][21], a[21], res=INT_MAX;
 
