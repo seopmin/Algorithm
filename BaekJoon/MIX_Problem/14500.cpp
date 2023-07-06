@@ -17,7 +17,6 @@ void dfs(int depth, int sum, int x, int y) {
 	if(visited[y][x]) return;
 	sum += map[y][x];
 	if(depth == 3) {
-
 		res = max(res, sum);
 		return;
 	}
@@ -37,16 +36,12 @@ void dfs(int depth, int sum, int x, int y) {
 
 int main() {
 	cin >> n >> m;
-	for(int i=0; i<n; i++) {
-		for(int j=0; j<m; j++) {
+	for(int i=0; i<n; i++)
+		for(int j=0; j<m; j++)
 			cin >> map[i][j];
-		}
-	}
 
-	for(int i=0; i<n; i++) {
-		for(int j=0; j<m; j++) {
+	for(int i=0; i<n; i++)
+		for(int j=0; j<m; j++)
 			dfs(0, 0, j, i);
-		}
-	}
 	cout << res;
 }
