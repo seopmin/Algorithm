@@ -184,38 +184,40 @@ int main() {
 */
 
 // 15684 사다리 조각
-/*
 
+/*
 #include<iostream>
 #include<algorithm>
 #include<limits.h>
 using namespace std;
 int n, h, m, y, x, visited[31][11], result=INT_MAX;
 
+// 현재 사다리 게임 상태에서 모든 세로선의 결과가 원하는 결과와 일치하는지 확인하는 함수
 bool check() {
   for(int i=1; i<=n; i++) {
     int pos=i;
     for(int j=1; j<=h; j++) {
-      if(visited[j][pos]) pos++;
-      else if(visited[j][pos-1]) pos--;
+      if(visited[j][pos]) pos++; // 가로선이 오른쪽으로 이동하도록 pos를 증가시킴
+      else if(visited[j][pos-1]) pos--; // 가로선이 왼쪽으로 이동하도록 pos를 감소시킴
     }
-    if(i!=pos) return false;
+    if(i!=pos) return false; // i번 세로선의 결과가 i가 아니라면 false 반환
   }
-  return true;
+  return true; // 모든 세로선의 결과가 정상적이면 true 반환
 }
 
+// 사다리 게임을 조작하는 함수
 void func(int pos, int cnt) {
-  if(cnt>3 || cnt>=result) return ;
+  if(cnt>3 || cnt>=result) return ; // 가로선 추가 횟수가 3을 넘거나 최소값을 넘어서면 종료
   if(check()) {
-    result = min(result, cnt);
+    result = min(result, cnt); // 모든 세로선의 결과가 정상적이면 최소값 갱신
     return;
   }
   for(int i=pos; i<=h; i++) {
     for(int j=1; j<=n; j++) {
-      if(visited[i][j] || visited[i][j-1] || visited[i][j+1]) continue;
-      visited[i][j]=1;
-      func(i, cnt+1);
-      visited[i][j]=0;
+      if(visited[i][j] || visited[i][j-1] || visited[i][j+1]) continue; // 이미 가로선이 있는 위치거나 인접한 위치에 가로선이 있는 경우 건너뜀
+      visited[i][j]=1; // 가로선 추가
+      func(i, cnt+1); // 재귀 호출로 다음 경우 확인
+      visited[i][j]=0; // 가로선 제거 (백트래킹)
     }
   }
 }
@@ -224,11 +226,11 @@ int main() {
   cin >> n >> m >> h;
   for(int i=0; i<m; i++) {
     cin >> y >> x;
-    visited[y][x]=1;
+    visited[y][x]=1; // 주어진 가로선 정보를 기반으로 초기 사다리 상태 설정
   }
-  func(1, 0);
-  if(result==INT_MAX) cout << -1;
-  else cout << result;
+  func(1, 0); // 가로선 추가 시작
+  if(result==INT_MAX) cout << -1; // 결과 값이 최대값인 경우 -1 출력 (해결 불가능한 경우)
+  else cout << result; // 결과 값 출력
 }
 
 */
