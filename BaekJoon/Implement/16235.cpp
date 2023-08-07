@@ -22,12 +22,12 @@ vector<deque<info>> v;
 void spring_summer() {
   for(int i=0; i<n; i++) {
     for(int j=0; j<n; j++) {
-      int size = v[i][j].tree.size();
+      int size=v[i][j].tree.size();
       int dead_pos=size;
-      int &s2d2 = v[i][j].nutrient;
+      int &yangbun=v[i][j].nutrient;
       for(int w=0; w<size; w++) {
-        if(s2d2-v[i][j].tree[w] >= 0) {
-          s2d2 -= v[i][j].tree[w];  // 양분의 나이만큼 땅 양분 감소
+        if(yangbun-v[i][j].tree[w] >= 0) {
+          yangbun -= v[i][j].tree[w];  // 양분의 나이만큼 땅 양분 감소
           v[i][j].tree[w]++;
         } else {
           dead_pos=w;
@@ -35,7 +35,7 @@ void spring_summer() {
         }
       }
       for(int w=dead_pos; w<size; w++)
-        s2d2 += v[i][j].tree[w]/2;  // (죽은 나무의 나이 / 2) -> 땅 양분에 추가
+        yangbun += v[i][j].tree[w]/2;  // (죽은 나무의 나이 / 2) -> 땅 양분에 추가
       
       for(int w=dead_pos; w<size; w++)
         v[i][j].tree.pop_back();  // 죽은 나무 컷
@@ -81,7 +81,6 @@ int main() {
     int x, y, z;
     cin >> x >> y >> z;
     v[y-1][x-1].tree.push_back(z);
-    sort(v[y-1][x-1].tree.begin(), v[y-1][x-1].tree.end());
   }
 
   while(k--) {
