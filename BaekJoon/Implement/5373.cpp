@@ -7,7 +7,7 @@ using namespace std;
 // 윗면: w, 아랫면: y, 앞 면, r, 뒷 면: o, 왼쪽 면: g, 오른쪽 면: b
 int tc, n;
 string s;
-char basic_cube[6][3][3] = {
+char basic_cube[6][3][3]={
 	{{'w','w','w'},{'w','w','w'},{'w','w','w'}},
 	{{'y','y','y'},{'y','y','y'},{'y','y','y'}},
 	{{'o','o','o'},{'o','o','o'},{'o','o','o'}},
@@ -23,31 +23,31 @@ void setting_2(int pos, int dir) {
 	char t1, t2, t3;
 	if(pos==0) {
 		if(dir==1) {
-			t1=cube[2][0][0], t2 = cube[2][0][1], t3=cube[2][0][2];
+			t1=cube[2][0][0], t2=cube[2][0][1], t3=cube[2][0][2];
 			cube[2][0][0]=cube[4][0][0], cube[2][0][1]=cube[4][0][1], cube[2][0][2]=cube[4][0][2];
 			cube[4][0][0]=cube[3][0][0], cube[4][0][1]=cube[3][0][1], cube[4][0][2]=cube[3][0][2];
 			cube[3][0][0]=cube[5][0][0], cube[3][0][1]=cube[5][0][1], cube[3][0][2]=cube[5][0][2];
 			cube[5][0][0]=t1, cube[5][0][1]=t2, cube[5][0][2]=t3;
 		} else {
-			t1 = cube[2][0][0], t2 = cube[2][0][1], t3 = cube[2][0][2];
+			t1=cube[2][0][0], t2=cube[2][0][1], t3=cube[2][0][2];
 			cube[2][0][0]=cube[5][0][0], cube[2][0][1]=cube[5][0][1], cube[2][0][2]=cube[5][0][2];
-			cube[5][0][0] = cube[3][0][0], cube[5][0][1] = cube[3][0][1], cube[5][0][2] = cube[3][0][2];
-			cube[3][0][0] = cube[4][0][0], cube[3][0][1] = cube[4][0][1], cube[3][0][2] = cube[4][0][2];
-			cube[4][0][0] = t1, cube[4][0][1] = t2, cube[4][0][2] = t3;
+			cube[5][0][0]=cube[3][0][0], cube[5][0][1]=cube[3][0][1], cube[5][0][2]=cube[3][0][2];
+			cube[3][0][0]=cube[4][0][0], cube[3][0][1]=cube[4][0][1], cube[3][0][2]=cube[4][0][2];
+			cube[4][0][0]=t1, cube[4][0][1]=t2, cube[4][0][2]=t3;
 		}
 	} else if(pos==1) {
 		if(dir==1) {
-			t1 = cube[2][2][0], t2 = cube[2][2][1], t3 = cube[2][2][2];
-			cube[2][2][0] = cube[5][2][0], cube[2][2][1] = cube[5][2][1], cube[2][2][2] = cube[5][2][2];
-			cube[5][2][0] = cube[3][2][0], cube[5][2][1] = cube[3][2][1], cube[5][2][2] = cube[3][2][2];
-			cube[3][2][0] = cube[4][2][0], cube[3][2][1] = cube[4][2][1], cube[3][2][2] = cube[4][2][2];
-			cube[4][2][0] = t1, cube[4][2][1] = t2, cube[4][2][2] = t3;
+			t1=cube[2][2][0], t2=cube[2][2][1], t3=cube[2][2][2];
+			cube[2][2][0]=cube[5][2][0], cube[2][2][1]=cube[5][2][1], cube[2][2][2]=cube[5][2][2];
+			cube[5][2][0]=cube[3][2][0], cube[5][2][1]=cube[3][2][1], cube[5][2][2]=cube[3][2][2];
+			cube[3][2][0]=cube[4][2][0], cube[3][2][1]=cube[4][2][1], cube[3][2][2]=cube[4][2][2];
+			cube[4][2][0]=t1, cube[4][2][1]=t2, cube[4][2][2]=t3;
 		} else {
-			t1 = cube[2][2][0], t2 = cube[2][2][1], t3 = cube[2][2][2];
-			cube[2][2][0] = cube[4][2][0], cube[2][2][1] = cube[4][2][1], cube[2][2][2] = cube[4][2][2];
-			cube[4][2][0] = cube[3][2][0], cube[4][2][1] = cube[3][2][1], cube[4][2][2] = cube[3][2][2];
-			cube[3][2][0] = cube[5][2][0], cube[3][2][1] = cube[5][2][1], cube[3][2][2] = cube[5][2][2];
-			cube[5][2][0] = t1, cube[5][2][1] = t2, cube[5][2][2] = t3;
+			t1=cube[2][2][0], t2=cube[2][2][1], t3=cube[2][2][2];
+			cube[2][2][0]=cube[4][2][0], cube[2][2][1]=cube[4][2][1], cube[2][2][2]=cube[4][2][2];
+			cube[4][2][0]=cube[3][2][0], cube[4][2][1]=cube[3][2][1], cube[4][2][2]=cube[3][2][2];
+			cube[3][2][0]=cube[5][2][0], cube[3][2][1]=cube[5][2][1], cube[3][2][2]=cube[5][2][2];
+			cube[5][2][0]=t1, cube[5][2][1]=t2, cube[5][2][2]=t3;
 		}
 	} else if(pos==2) {
 		if(dir==1) {
@@ -143,7 +143,7 @@ void init_cube() {
 	for(int i=0; i<6; i++) {
 		for(int j=0; j<3; j++) {
 			for(int k=0; k<3; k++) {
-				cube[i][j][k] = basic_cube[i][j][k];
+				cube[i][j][k]=basic_cube[i][j][k];
 			}
 		}
 	}
