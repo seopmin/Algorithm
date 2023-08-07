@@ -16,7 +16,7 @@ int func() {
   for(int i=0; i<home.size(); i++) {
     tie(h_x, h_y) = home[i];
     int distance=INT_MAX;
-    for(int j=0; j<14; j++) {
+    for(int j=0; j<chicken.size(); j++) {
       if(select_c[j] == 1) {
         tie(c_x, c_y) = chicken[j];
         distance = min(distance, abs(h_x-c_x)+abs(h_y-c_y));
@@ -28,8 +28,8 @@ int func() {
 }
 
 void combi(int cnt, int k) {
-  if(cnt==m) {
-    result = min(result,func());
+  if(cnt==m) {  // m만큼 치킨집을 뽑음
+    result = min(result,func());  // 가장 최적의 도시 치킨 거리를 찾음
     return;
   }
 
