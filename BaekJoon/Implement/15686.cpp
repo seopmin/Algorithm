@@ -1,72 +1,59 @@
 // 1. 치킨 거리가 가장 작은 M개의 치킨집을 골라 벡터에 거리 정보만 저장
 
-
-
 #include<iostream>
-#include<string.h>
-#include<queue>
-#include<limits.h>
+#include<vector>
+#include<tuple>
 #include<algorithm>
+#include<cstdlib>
+#include<limits.h>
 using namespace std;
-int n, m, arr[51][51];
-int dx[] = {0,0,1,-1};
-int dy[] = {1,-1,0,0};
-int result[14];
+int n, m, h_x, h_y, c_x, c_y, map[51][51], select_c[14], result=INT_MAX;
+vector<pair<int, int>> home;
+vector<pair<int, int>> chicken;
 
-int bfs(int x, int y, int depth) {
-  queue<tuple<int, int, int>> q;
-  q.push({x, y, depth});
-  while(!q.empty()) {
-    tie(x, y, depth) = q.front(); q.pop();
-    for(int i=0; i<4; i++) {
-      int nx = x+dx[i];
-      int ny = y+dy[i];
-      if(nx>=1 && ny>=1 && nx<=5 && ny<=5) {
-        if(arr[nx][ny]==1) return depth+1;
-        q.push({nx, ny, depth+1});
+int func() {
+  int sum=0;
+  for(int i=0; i<home.size(); i++) {
+    tie(h_x, h_y) = home[i];
+    int distance=INT_MAX;
+    for(int j=0; j<chicken.size(); j++) {
+      if(select_c[j] == 1) {
+        tie(c_x, c_y) = chicken[j];
+        distance = min(distance, abs(h_x-c_x)+abs(h_y-c_y));
       }
     }
+    sum += distance;
   }
-  return 0;
+  return sum;
 }
 
-void push(int d) {
-  result[0]=d;
-  for(int i=1; i<=m; i++) {
-    if(result[i-1] < result[i])
-      swap(result[i-1], result[i]);
+void combi(int cnt, int k) {
+  if(cnt==m) {  // m만큼 치킨집을 뽑음
+    result = min(result,func());  // 가장 최적의 도시 치킨 거리를 찾음
+    return;
   }
-}
 
-void set() {
-  for(int i=0; i<14; i++)
-    result[i] = INT_MAX;
+  for(int i=k+1; i<chicken.size(); i++) {
+    select_c[i]=1;
+    combi(cnt+1, i);
+    select_c[i]=0;
+  }
 }
 
 int main() {
   cin >> n >> m;
-  set();
+  for(int i=0; i<n; i++) {
+    for(int j=0; j<n; j++) {
+      cin >> map[i][j];
+      if(map[i][j]==1) home.push_back({j, i});
+      else if(map[i][j]==2) chicken.push_back({j, i});
+    }
+  }
   
-  for(int i=1; i<=n; i++) {
-    for(int j=1; j<=n; j++) {
-      cin >> arr[i][j];
-    }
+  for(int i=0; i<chicken.size(); i++) {
+    select_c[i]=1;
+    combi(1, i);
+    select_c[i]=0;
   }
-
-  for(int i=1; i<=n; i++) {
-    for(int j=1; j<=n; j++) {
-      if(arr[i][j]!=2) continue;
-      int distance = bfs(i, j, 0);
-      cout << distance << endl;
-      push(distance);
-    }
-  }
-  int sum=0;
-  for(int i=1; i<=m; i++){
-    cout << result[i] << endl;
-    sum += result[i];
-  }
-
-  cout << sum;
-
+  cout << result;
 }
