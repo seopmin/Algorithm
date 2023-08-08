@@ -26,7 +26,7 @@ void right_side(int w, int dir) {
   if(w>4) return;  // 기저조건: 오른쪽에 톱니바퀴가 없을 때
   if(wheels[w][3] != wheels[w+1][7]) {  // 오른쪽 톱니바퀴와 극이 다를 때
     right_side(w+1, -1*dir);  // 재귀 호출(방향전환: dir * -1)
-    spin(w+1, -1*dir);
+    spin(w+1, -1*dir);  // 순서 중요
   }  
 }
 
@@ -217,7 +217,7 @@ void func(int pos, int cnt) {
       if(visited[i][j] || visited[i][j-1] || visited[i][j+1]) continue; // 이미 가로선이 있는 위치거나 인접한 위치에 가로선이 있는 경우 건너뜀
       visited[i][j]=1; // 가로선 추가
       func(i, cnt+1); // 재귀 호출로 다음 경우 확인
-      visited[i][j]=0; // 가로선 제거 (백트래킹)
+      visited[i][j]=0; // 가로선 제거
     }
   }
 }
