@@ -1,3 +1,6 @@
+// spread 차원 배열을 따로 둔 이유 -> 확산은 동시에 일어나기 때문에 바로 맵에 더해주면 동시가 아니게 됨.
+// -> 따라서 확산된 미세먼지를 따로 담아두어 모두 확산이 일어난 뒤 맵에 확산된 미세먼지를 더해줌
+
 #include<iostream>
 #include<queue>
 #include<string.h>
@@ -6,7 +9,7 @@ int r, c, t, a[51][51], spread[51][51], pos_t, pos_b;
 int dy[] = {0,0,1,-1};
 int dx[] = {1,-1,0,0};
 
-void func2(int x, int y) {
+void func2(int x, int y) {  // 확산되는 미세먼지를 구하는 함수
 	int sp = a[y][x]/5, cnt=0;
 	for(int i=0; i<4; i++) {
 		int nx=x+dx[i], ny=y+dy[i];
@@ -17,7 +20,7 @@ void func2(int x, int y) {
 	a[y][x] -= cnt*sp;
 }
 
-void func() {
+void func() {  // 해당 위치에 미세먼지가 있는지 확인하는 함수
 	for(int i=0; i<r; i++) {
 		for(int j=0; j<c; j++) {
 			if(a[i][j]==-1 || a[i][j]==0) continue;
@@ -26,7 +29,7 @@ void func() {
 	}
 }
 
-void sum_f() {
+void sum_f() {  // 확산된 미세먼지를 해당 맵에 더하는 함수
 	for(int i=0; i<r; i++) {
 		for(int j=0; j<c; j++) {
 			if(a[i][j]==-1) continue;
@@ -35,7 +38,7 @@ void sum_f() {
 	}
 }
 
-void clean_f() {
+void clean_f() {  // 미세먼지를 청소하는 함수
 	for(int i=pos_t; i>=0; i--)
 		a[i][0]=a[i-1][0];
 	
