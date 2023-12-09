@@ -11,18 +11,14 @@ int h, w, n, m, x, y;
 int main() {
   cin >> h >> w >> n >> m;
 
+  x += h/(n+1);
+  y += w/(m+1);
+  
   if(h%(n+1)) {
-    x += h/(n+1);
     x += 1;
-  } else {
-    x += h/(n+1);
   }
-
   if(w%(m+1)) {
-    y += w/(m+1);
     y += 1;
-  } else {
-    y += w/(m+1);
-  }
+  } 
   cout << x*y;
 }
