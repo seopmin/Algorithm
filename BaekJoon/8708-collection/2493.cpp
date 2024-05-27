@@ -10,7 +10,6 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
     int n; std::cin >> n;
-    bool is_res = false;
     for (int i=1; i<=n; i++) {
         cin >> input;
         while (dq.size() != 0 && dq.back().first < input) {
