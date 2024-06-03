@@ -22,6 +22,8 @@ bool checkArr(int a[], int b[], int size) {
 void dfs(int arr[], int depth) {
   
   if (depth > p) return;
+
+  
   for (int i=0; i<=n; i++) {
 
   }
