@@ -3,9 +3,9 @@ using namespace std;
 
 int n, s, front, back;
 int result = 987654321;
-int arr[1000001];
-int dp[1000001];
+int arr[100001];
 int cur_val;
+int cur_cnt;
 
 int main() {
   cin >> n >> s;
@@ -14,25 +14,25 @@ int main() {
   }
 
   cur_val = arr[0];
-  dp[0] = 1;
+  cur_cnt = 1;
 
-  if (cur_val >= s) result = min(result, dp[front]);
+  if (cur_val >= s) result = min(result, cur_cnt);
   
   front = 1;
   while (front <= n) {
     cur_val += arr[front];
-    dp[front] = dp[front-1] + 1;
+    cur_cnt += 1;
 
     while (back <= front) {
       if (cur_val - arr[back] < s) break;
       cur_val -= arr[back];
       back++;
-      dp[front]--;
+      cur_cnt--;
     }
 
     // cout << cur_val << " ";
     if (cur_val >= s) {
-      result = min(result, dp[front]);
+      result = min(result, cur_cnt);
     }
     front++;
   }
