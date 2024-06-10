@@ -3,8 +3,8 @@ using namespace std;
 
 int n, s, front, back;
 int result = 987654321;
-int arr[100001];
-int dp[100001];
+int arr[1000001];
+int dp[1000001];
 int cur_val;
 
 int main() {
@@ -13,15 +13,12 @@ int main() {
     cin >> arr[i];
   }
 
-  if (arr[0] <= s) {
-    cur_val = arr[0];
-    dp[0] = 1;
-    if (cur_val >= s) {
-      result = min(result, dp[front]);
-    }
-  }
-  front = 1;
+  cur_val = arr[0];
+  dp[0] = 1;
 
+  if (cur_val >= s) result = min(result, dp[front]);
+  
+  front = 1;
   while (front <= n) {
     cur_val += arr[front];
     dp[front] = dp[front-1] + 1;
